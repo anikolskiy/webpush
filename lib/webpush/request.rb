@@ -18,6 +18,8 @@ module Webpush
     def perform
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = true
+      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
       req = Net::HTTP::Post.new(uri.request_uri, headers)
       req.body = body
       resp = http.request(req)
